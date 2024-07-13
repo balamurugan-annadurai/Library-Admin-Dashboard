@@ -77,7 +77,8 @@ const AddBookPopUp = () => {
                       }
   
                       <input
-                          type="date"
+                                type="date"
+                            placeholder='Enter the date'
                           {...formik.getFieldProps('publicationDate')}
                       />
                       <hr />
