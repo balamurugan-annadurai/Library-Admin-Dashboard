@@ -61,7 +61,7 @@ const BookDetailsCard = ({ book }) => {
         }
     })
     return (
-        <div className='col-xl-4 col-12 col-md-6'>
+        <div className='col-xl-4 col-12 col-md-6 margin-right'>
             <div className="book-details mt-2 mb-2">
                 {
                     isEditing
