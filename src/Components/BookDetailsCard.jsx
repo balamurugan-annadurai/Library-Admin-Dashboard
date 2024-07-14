@@ -1,9 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
 import MyContext from '../Context/MyContext';
+import { useFormik } from 'formik';
+import * as yup from 'yup'
 
-const BookDetailsCard = ({book}) => {
+const BookDetailsCard = ({ book }) => {
     const [showMoreStatus, setShowMoreStatus] = useState(false);
     const { deleteBook } = useContext(MyContext);
+    const [isEditing, setIsEditing] = useState(false);
+
+    const [bookTitle, setBookTitle] = useState(book.bookTitle);
+
     const readMore = () => {
         setShowMoreStatus(true)
     }
@@ -15,12 +21,81 @@ const BookDetailsCard = ({book}) => {
     const handleDeleteClick = () => {
         deleteBook(book.id)
     }
+
+    const handleEditClick = () => {
+        setIsEditing(true)
+        setShowMoreStatus(true);
+    }
+
+    const formik = useFormik({
+        initialValues: {
+            bookTitle: book.bookTitle,
+            isbnNumber: book.isbnNumber,
+            publicationDate: book.publicationDate,
+            authorName: book.authorName,
+            dateOfBirth: book.dateOfBirth,
+            biography: book.biography
+        },
+        validationSchema: yup.object({
+            bookTitle: yup.string().required('Required'),
+            isbnNumber: yup.string().required('Required'),
+            publicationDate: yup.date()
+                .required('Required')
+                .max(new Date(), 'Date cannot be in future'),
+            authorName: yup.string().required('Required'),
+            biography: yup.string()
+                .required('Required')
+                .max(200, 'Not more than 200 characters'),
+            dateOfBirth: yup.date()
+                .required('Required')
+                .max(new Date(), 'Date cannot be in future')
+        }),
+        onSubmit: (values) => {
+            book.bookTitle = values.bookTitle
+            book.isbnNumber = values.isbnNumber
+            book.publicationDate = values.publicationDate
+            book.authorName = values.authorName
+            book.dateOfBirth = values.dateOfBirth
+            book.biography = values.biography
+            setIsEditing(false)
+        }
+    })
     return (
-        <div className='col-xl-4'>
-            <div className="book-details mt-3">
-                <p><span className="fw-semibold purple fw-bold">Book Name:</span> {book.bookTitle}</p>
-                <p><span className="fw-semibold purple fw-bold" >ISBN Number: </span> {book.isbnNumber}</p>
-                <p> <span className="fw-semibold purple fw-bold">Publication Date: </span> {book.publicationDate}</p>
+        <div className='col-xl-4 col-12 col-md-6'>
+            <div className="book-details mt-2 mb-2">
+                {
+                    isEditing
+                        ?
+                        <>
+                            {formik.touched.bookTitle && formik.errors.bookTitle
+                                ? (<div className='error-msg'>{formik.errors.bookTitle}</div>)
+                                : null
+                            }
+                            <input className='edit-input' type="text"
+                                {...formik.getFieldProps('bookTitle')}
+                            />
+                            {formik.touched.isbnNumber && formik.errors.isbnNumber
+                                ? (<div className='error-msg'>{formik.errors.isbnNumber}</div>)
+                                : null
+                            }
+                            <input className='edit-input' type="text"
+                                {...formik.getFieldProps('isbnNumber')}
+                            />
+                            {formik.touched.publicationDate && formik.errors.publicationDate
+                                ? (<span className='error-msg'>{formik.errors.publicationDate}</span>)
+                                : null
+                            }
+                            <input className='edit-input' type="date"
+                                {...formik.getFieldProps('publicationDate')}
+                            />
+                        </>
+                        :
+                        <>
+                            <p><span className="fw-semibold purple fw-bold">Book Name:</span> {book.bookTitle}</p>
+                            <p><span className="fw-semibold purple fw-bold" >ISBN Number: </span> {book.isbnNumber}</p>
+                            <p> <span className="fw-semibold purple fw-bold">Publication Date: </span> {book.publicationDate}</p>
+                        </>
+                }
                 <div className='d-flex justify-content-between align-items-center'>
                     {
                         !showMoreStatus
@@ -28,7 +103,15 @@ const BookDetailsCard = ({book}) => {
                             : <p onClick={readLess} className='read-more'>Show Less</p>
                     }
                     <div>
-                        <button className='custom-btn edit-btn'>Edit</button>
+                        {
+                            isEditing
+                                ? <button
+                                    type="submit"
+                                    onClick={formik.handleSubmit}
+                                    className='custom-btn edit-btn'>Save</button>
+                                : <button onClick={handleEditClick} className='custom-btn edit-btn'>Edit</button>
+
+                        }
                         <button onClick={handleDeleteClick} className='custom-btn delete-btn'>Delete</button>
                     </div>
                 </div>
@@ -36,9 +119,39 @@ const BookDetailsCard = ({book}) => {
 
             <div className={showMoreStatus ? "author-details display mt-1" : "author-details"}>
                 <p className='fw-bold purple'>Author Details 👇</p>
-                <p><span className="fw-semibold">Author Name:</span> {book.authorName}</p>
-                <p><span className="fw-semibold" >Date of birth: </span> {book.dateOfBirth}</p>
-                <p> <span className="fw-semibold">Biography: </span> {book.biography}</p>
+                {
+                    isEditing
+                        ?
+                        <>
+                            {formik.touched.authorName && formik.errors.authorName
+                                ? (<div className='error-msg'>{formik.errors.authorName}</div>)
+                                : null
+                            }
+                            <input className='edit-input' type="text"
+                                {...formik.getFieldProps('authorName')}
+                            />
+                            {formik.touched.dateOfBirth && formik.errors.dateOfBirth
+                                ? (<span className='error-msg'>{formik.errors.dateOfBirth}</span>)
+                                : null
+                            }
+                            <input className='edit-input' type="date"
+                                {...formik.getFieldProps('dateOfBirth')}
+                            />
+                            {formik.touched.biography && formik.errors.biography
+                                ? (<span className='error-msg'>{formik.errors.biography}</span>)
+                                : null
+                            }
+                            <textarea name="" id=""
+                                {...formik.getFieldProps('biography')}
+                            ></textarea>
+                        </>
+                        :
+                        <>
+                            <p><span className="fw-bold">Author Name:</span> {book.authorName}</p>
+                            <p><span className="fw-bold" >Date of birth: </span> {book.dateOfBirth}</p>
+                            <p> <span className="fw-bold">Biography: </span> {book.biography}</p>
+                        </>
+                }
             </div>
         </div>
     )

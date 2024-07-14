@@ -5,10 +5,10 @@ import MyContext from './Context/MyContext';
 import BookDetailsCard from './Components/BookDetailsCard';
 import { reducer } from './Reducer/Reducer';
 
+
 const App = () => {
   const [closeIconStatus, setCloseIconStatus] = useState(false);
   const [books, dispatch] = useReducer(reducer, []);
-  console.log(books)
   const addBookClick = () => {
     setCloseIconStatus(true);
     document.body.style.overflow = 'hidden'
@@ -24,8 +24,8 @@ const App = () => {
   const deleteBook = (id) => {
     dispatch({
       type: 'DELETE',
-      id:id
-     })
+      id:id,
+    })
   }
   return (
     <>
@@ -39,11 +39,11 @@ const App = () => {
           <AddBookPopUp />
           <h1 className='title'>Admin Dashboard</h1>
           <div onClick={addBookClick} className='add-book'>Add Book</div>
-
+          
           <div className="mt-4 row container w-100 justify-content-center">
             {
-              books.map((book, index) => (
-                <BookDetailsCard book={book} key={index} />
+              books.map((book) => (
+                <BookDetailsCard book={book} key={book.id} />
               ))
             }
           </div>
