@@ -4,30 +4,39 @@ import { useFormik } from 'formik';
 import * as yup from 'yup'
 
 const BookDetailsCard = ({ book }) => {
+    //state for showMoreStatus
     const [showMoreStatus, setShowMoreStatus] = useState(false);
+    //state for deleteBook
     const { deleteBook } = useContext(MyContext);
+    //state for isEditing
     const [isEditing, setIsEditing] = useState(false);
-
+    //state for bookTitle
     const [bookTitle, setBookTitle] = useState(book.bookTitle);
 
+    //function to show more content
     const readMore = () => {
         setShowMoreStatus(true)
     }
 
+    //function to less content
     const readLess = () => {
         setShowMoreStatus(false)
     }
 
+    //function to handle delete click
     const handleDeleteClick = () => {
         deleteBook(book.id)
     }
 
+    //function to handle edit click
     const handleEditClick = () => {
         setIsEditing(true)
         setShowMoreStatus(true);
     }
 
+    //useFormik
     const formik = useFormik({
+        //initial values
         initialValues: {
             bookTitle: book.bookTitle,
             isbnNumber: book.isbnNumber,
@@ -36,6 +45,7 @@ const BookDetailsCard = ({ book }) => {
             dateOfBirth: book.dateOfBirth,
             biography: book.biography
         },
+        //validation
         validationSchema: yup.object({
             bookTitle: yup.string().required('Required'),
             isbnNumber: yup.string().required('Required'),
@@ -50,6 +60,7 @@ const BookDetailsCard = ({ book }) => {
                 .required('Required')
                 .max(new Date(), 'Date cannot be in future')
         }),
+        //onSubmit
         onSubmit: (values) => {
             book.bookTitle = values.bookTitle
             book.isbnNumber = values.isbnNumber

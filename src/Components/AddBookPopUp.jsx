@@ -5,9 +5,12 @@ import MyContext from '../Context/MyContext'
 
 const AddBookPopUp = () => {
 
+    //useContext
     const { closeIconStatus, setCloseIconStatus, getUserValues } = useContext(MyContext);
 
+   //useFormik
     const formik = useFormik({
+        //giving intial values
         initialValues: {
             bookTitle: '',
             isbnNumber: '',
@@ -16,6 +19,7 @@ const AddBookPopUp = () => {
             dateOfBirth: '',
             biography: ''
         },
+        //validation
         validationSchema: yup.object({
             bookTitle: yup.string().required('Required'),
             isbnNumber: yup.string().required('Required'),
@@ -30,6 +34,7 @@ const AddBookPopUp = () => {
                 .required('Required')
                 .max(new Date(), 'Date cannot be in future')
         }),
+        //onSubmit
         onSubmit: (values) => {
             getUserValues(values);
             formik.resetForm();
@@ -39,6 +44,7 @@ const AddBookPopUp = () => {
         }
     })
 
+    //function to handel close icon click
     const closeIconClick = () => {
         setCloseIconStatus(!closeIconStatus);
         document.body.style.overflow = 'auto'

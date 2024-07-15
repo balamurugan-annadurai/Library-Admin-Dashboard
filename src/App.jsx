@@ -7,13 +7,18 @@ import { reducer } from './Reducer/Reducer';
 
 
 const App = () => {
+  //state closeIconStatus
   const [closeIconStatus, setCloseIconStatus] = useState(false);
+  //useReducer
   const [books, dispatch] = useReducer(reducer, []);
+
+  //function to add book
   const addBookClick = () => {
     setCloseIconStatus(true);
     document.body.style.overflow = 'hidden'
   }
 
+  //function to get user values
   const getUserValues = (values) => {
     dispatch({
       type: 'ADD',
@@ -21,12 +26,14 @@ const App = () => {
     })
   }
 
+  //function to delete book
   const deleteBook = (id) => {
     dispatch({
       type: 'DELETE',
       id:id,
     })
   }
+  
   return (
     <>
       <MyContext.Provider value={{
