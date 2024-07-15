@@ -11,9 +11,9 @@ const AddBookPopUp = () => {
         initialValues: {
             bookTitle: '',
             isbnNumber: '',
-            publicationDate: 'publicationDate',
+            publicationDate: '',
             authorName: '',
-            dateOfBirth: 'dateOfBirth',
+            dateOfBirth: '',
             biography: ''
         },
         validationSchema: yup.object({
