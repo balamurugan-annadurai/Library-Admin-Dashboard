@@ -1,14 +1,7 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-html, body {
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-    height: 100%; /* Ensure body and html take up 100% of the viewport height */
-    width: 100%; /* Ensure body and html take up 100% of the viewport width */
-    overflow: hidden; /* Prevent scrolling */
 }
 
 body {
@@ -16,11 +9,11 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed; /* Make the background image fixed */
+    background-attachment: fixed;
 }
 
 
-.add-book{
+.add-book {
     background-color: #fff;
     color: #5d52ca;
     padding: 10px 20px;
@@ -30,24 +23,27 @@ body {
     transition: .4s;
     border: none;
     outline: none;
-    box-shadow: 0px 15px 25px rgba(0,0,0,.3);
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, .3);
     border: 3px solid #5d52ca;
     margin-right: auto;
 }
-.add-book:hover{
+
+.add-book:hover {
     transform: scale(0.9);
 }
-.title{
+
+.title {
     color: #fff;
     margin-top: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 15px 25px rgba(0,0,0,.8);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .8);
     padding: 10px 20px;
     border-radius: 15px;
     background-color: #5d52ca;
     margin-right: auto;
 }
-.pop-up-container{
+
+.pop-up-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,10 +52,11 @@ body {
     position: absolute;
     height: 100vh;
 }
-.pop-up{
+
+.pop-up {
     display: flex;
     flex-direction: column;
-    box-shadow: 0 15px 25px rgba(0,0,0,.2);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
     padding: 10px 20px 5px 20px;
     width: 300px;
     border-radius: 20px;
@@ -67,96 +64,117 @@ body {
     border: 3px solid #5d52ca;
     justify-content: space-evenly;
 }
-.pop-up p{
+
+.pop-up p {
     color: #040f39;
     font-weight: 600;
     margin: 0;
     margin-bottom: 3px;
 }
-.pop-up input,textarea{
-   border: 2px solid #c5c3c3;
-   outline: none;
-   transition: .4s;
-   padding: 5px 8px;
-   margin-bottom: 8px;
-   border-radius: 5px;
+
+.pop-up input,
+textarea {
+    border: 2px solid #c5c3c3;
+    outline: none;
+    transition: .4s;
+    padding: 5px 8px;
+    margin-bottom: 8px;
+    border-radius: 5px;
 }
-.pop-up input:focus, textarea:focus{
+
+.pop-up input:focus,
+textarea:focus {
     border: 2px solid #5d52ca;
     outline: none;
 }
-.pop-up textarea{
+
+.pop-up textarea {
     resize: none;
 }
-.pop-up button{
+
+.pop-up button {
     margin: 5px 0 10px 0;
 }
-.pop-up hr{
+
+.pop-up hr {
     background: #5d52ca;
     height: 2px;
     border-radius: 100px;
     margin: 5px 0 10px 0;
 }
-.close-icon{
+
+.close-icon {
     margin-left: auto;
     font-size: 25px;
     color: #5d52ca;
     transition: .4s;
 }
-.close-icon:hover{
+
+.close-icon:hover {
     transform: scale(.9);
     cursor: pointer;
 }
-.error-msg{
+
+.error-msg {
     color: red;
     font-size: 12px;
 }
-.book-details{
+
+.book-details {
     background-color: #fff;
     color: #040f39;
     padding: 10px 20px;
     border-radius: 20px;
-    box-shadow: 0 15px 25px rgba(0,0,0,.2);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
     border: 2px solid #5d52ca;
 }
-.margin-right{
+
+.margin-right {
     margin-right: auto;
 
 }
-.book-inner-container p{
+
+.book-inner-container p {
     margin: 0;
     margin: 5px 0;
     display: flex;
     align-items: center;
     gap: 5px;
 }
-.book-inner-container span{
+
+.book-inner-container span {
     font-weight: 700;
-}.down-icon{
+}
+
+.down-icon {
     font-size: 25px;
     font-weight: 800;
     cursor: pointer;
 }
-.author-details{
+
+.author-details {
     background-color: #fff;
     color: #040f39;
     padding: 10px 20px;
     border-radius: 20px;
-    box-shadow: 0 15px 25px rgba(0,0,0,.2);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
     border: 2px solid #040f39;
     display: none;
 }
-.display{
+
+.display {
     top: 0;
     display: block;
 }
-.read-more{
+
+.read-more {
     font-size: 15px;
     position: relative;
     cursor: pointer;
     margin: 0;
 }
-.read-more::before{
+
+.read-more::before {
     content: '';
     height: 1px;
     background-color: #5d52ca;
@@ -165,7 +183,8 @@ body {
     bottom: 0px;
     border-radius: 30px;
 }
-.custom-btn{
+
+.custom-btn {
     width: 90px;
     height: 35px;
     margin-left: 5px;
@@ -174,37 +193,46 @@ body {
     border-radius: 5px;
     transition: .4s;
 }
-.edit-btn{
+
+.edit-btn {
     background-color: #5d52ca;
     color: #fff;
     border: 2px solid #5d52ca;
 }
-.delete-btn{
+
+.delete-btn {
     border: 2px solid #040f39;
     color: #fff;
     background-color: #040f39;
     transition: .4s;
 }
-.edit-btn:hover{
+
+.edit-btn:hover {
     border: 2px solid #5d52ca;
     color: #5d52ca;
     background-color: #fff;
 }
-.delete-btn:hover{
+
+.delete-btn:hover {
     border: 2px solid #040f39;
     color: #040f39;
     background-color: #fff;
 }
-.purple{
+
+.purple {
     color: #5d52ca;
 }
-.bg-purple{
+
+.bg-purple {
     background-color: #5d52ca;
 }
-.white{
+
+.white {
     color: #fff;
 }
-.edit-input,textarea{
+
+.edit-input,
+textarea {
     border: 2px solid #c5c3c3;
     outline: none;
     transition: .4s;
@@ -212,33 +240,46 @@ body {
     margin-bottom: 8px;
     border-radius: 5px;
     width: 100%;
- }
- .edit-input:focus, textarea:focus{
-     border: 2px solid #5d52ca;
-     outline: none;
- }
- .pop-up textarea{
-     resize: none;
- }
-.banner-img{
+}
+
+.edit-input:focus,
+textarea:focus {
+    border: 2px solid #5d52ca;
+    outline: none;
+}
+
+.pop-up textarea {
+    resize: none;
+}
+
+.banner-img {
     width: 450px;
 }
-.banner-img img{
+
+.banner-img img {
     width: 100%;
     border-radius: 50px;
-    box-shadow: 0px 15px 25px rgba(0,0,0,.8);
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, .8);
 }
 
 @media screen and (max-height:645px) {
-    .pop-up-container{
+    .pop-up-container {
         height: auto;
         padding: 20px 0;
     }
 
 }
+
 @media screen and (max-width:388px) {
-    .custom-btn{
+    .custom-btn {
         width: 60px;
+    }
+
+}
+
+@media screen and (max-width:576px) {
+    body {
+        background-image: url('./assets/img1.jpg');
     }
 
 }
