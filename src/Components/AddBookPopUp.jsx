@@ -29,7 +29,8 @@ const AddBookPopUp = () => {
             authorName: yup.string().required('Required'),
             biography: yup.string()
                 .required('Required')
-                .max(200, 'Not more than 200 characters'),
+                .min(5,'Minumum 5 Characters Required')
+                .max(200, 'Max 200 Characters'),
             dateOfBirth: yup.date()
                 .required('Required')
                 .max(new Date(), 'Date cannot be in future')
